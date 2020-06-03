@@ -6,4 +6,6 @@ class Room:
         self.name = name
         self.attributes = attributes
 
+    def __str__(self):
+        return f"{self.name}"
     

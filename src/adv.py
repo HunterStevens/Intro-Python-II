@@ -38,7 +38,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+playerOne = Player("nowhere", room['outside'], [])
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +49,48 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+print(playerOne)
+print("\n Chose which direction you want to go with: \n 'n' for NORTH, 's' for SOUTH, w for 'WEST', 'e' for EAST, and 'q' to QUIT \n")
+
+
+while playerOne.move != "q":
+    print(playerOne.currentRoom.attributes)
+    playerOne.move = input(" ")
+#GOING NORTH
+    if playerOne.move == "n":
+        print("You went NORTH")
+        if playerOne.currentRoom.n_to:
+            playerOne.currentRoom = playerOne.currentRoom.n_to
+            print(playerOne)
+        else:
+            print(f"\n There are no rooms North of {playerOne.currentRoom} \n")
+#GOING EAST
+    elif playerOne.move == "e":
+        print("You went EAST")
+        if playerOne.currentRoom.e_to:
+            playerOne.currentRoom = playerOne.currentRoom.e_to
+            print(playerOne)
+        else:
+            print(f"\n There are no rooms East of {playerOne.currentRoom} \n")
+#GOING SOUTH
+    elif playerOne.move == "s":
+        print("You went SOUTH")
+        if playerOne.currentRoom.s_to:
+            playerOne.currentRoom = playerOne.currentRoom.s_to
+            print(playerOne)
+        else:
+            print(f"\n There are no rooms South of {playerOne.currentRoom} \n")
+#GOING WEST 
+    elif playerOne.move == "w":
+        print("You went WEST")
+        if playerOne.currentRoom.w_to:
+            playerOne.currentRoom = playerOne.currentRoom.w_to
+            print(playerOne)
+        else:
+            print(f"\n There are no rooms West of {playerOne.currentRoom} \n")
+#QUITING
+    elif playerOne.move == "q":
+        print("You RAGED QUIT")
+
+    else:
+        print("Enter in a valid direction, I'm not programmed to read acutal words or something.")
