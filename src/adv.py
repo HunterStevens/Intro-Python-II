@@ -5,7 +5,7 @@ from items import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", [Item("little feather", "it's your lucky charm from your childhood. Why couldn't you remember that?")]),
+                     "North of you, the cave mount beckons", [Item("little_feather", "it's your lucky charm from your childhood. Why couldn't you remember that?")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -35,6 +35,15 @@ room['treasure'].south_to = room['narrow']
 
 # Main
 
+def player_take(Taking_item):
+    for i in playerOne.currentRoom.items:
+        if i.name == Taking_item:
+            found_item = i
+        playerOne.add_item(found_item)
+        playerOne.currentRoom.drop_item(found_item)
+    else:
+        print(f"{Taking_item} does not exist in this room")
+
 # Make a new player object that is currently in the 'outside' room.
 playerOne = Player("player", "nowhere", room['outside'], [])
 # Write a loop that:
@@ -63,12 +72,15 @@ while not quit_game:
     if "inspect" in playerOne.move:
         print(f"{playerOne.currentRoom.name} currently has {playerOne.currentRoom.get_items()}")
 
-#Check inventory
+#Take an item in the room
     elif "take" in playerOne.move:
-        print(f'items this room currently has to take: {playerOne.currentRoom.get_items()}')
-        choice = input("Which item would you like to take? ")
-        playerOne.add_item(choice)
+        print(playerOne.move)
+        choice = playerOne.move[1]
+        player_take(choice)
 
+#Checking inventory
+    elif "inventory" in playerOne.move:
+        print
 
 #QUITING
     elif "q" in playerOne.move:

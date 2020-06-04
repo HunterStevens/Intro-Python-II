@@ -21,8 +21,5 @@ class Room:
         return f"{newItem} was added to {self.name}"
     
     def drop_item(self, pick):
-        for i in self.items:
-            if self.items[i] == int(pick):
-                self.items.remove(i)
-            else:
-                pass
+        print(f"pick: {pick}")
+        self.items.remove(pick)

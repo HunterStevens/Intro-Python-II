@@ -24,7 +24,7 @@ class Player:
     
     def direction(self):
         if "north" in self.move or "east" in self.move or "south" in self.move or "west" in self.move:
-            attribute = self.move[0] + "_to"
+            attribute = self.move + "_to"
             if hasattr(self.currentRoom, attribute):
                 self.currentRoom = getattr(self.currentRoom, attribute)
                 print(f"You moved to {self.currentRoom}")
