@@ -9,3 +9,24 @@ class Player:
         self.items = items
     def __str__(self):
         return f"Hello kid- er, {self.name}, you are Currently in: {self.currentRoom} with the items: \n {self.items}"
+
+    def add_item(self, newItem):
+        self.items.append(newItem)
+        return f"{self.name}, you just obtained {newItem}"
+
+    def drop_item(self, pick):
+        for i in self.items:
+            if self.items[i] == pick:
+                print(f"you dropped {self.items[i]}")
+                self.items.remove(i)
+            else:
+                pass
+    
+    def direction(self):
+        if self.move == "n" or self.move == "e" or self.move == "s" or self.move == "w":
+            attribute = self.move + "_to"
+            if hasattr(self.currentRoom, attribute):
+                self.currentRoom = getattr(self.currentRoom, attribute)
+                print(f"You moved to {self.currentRoom}")
+            else:
+                print(f"\n There are no rooms {self.move} of {self.currentRoom} \n")

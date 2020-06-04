@@ -1,10 +1,11 @@
 from room import Room
 from player import Player
+from items import Item
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", [Item("a little feather", "it's your lucky charm from your childhood. Why couldn't you remember that?")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -21,7 +22,6 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -33,9 +33,7 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-#
 # Main
-#
 
 # Make a new player object that is currently in the 'outside' room.
 playerOne = Player("player", "nowhere", room['outside'], [])
@@ -51,46 +49,17 @@ playerOne = Player("player", "nowhere", room['outside'], [])
 # If the user enters "q", quit the game.
 playerOne.name = input("What's your name kid?  -> ")
 print(playerOne)
-print("\n Chose what you want to do with: \n 'n' to go NORTH, 's' to go SOUTH, w to go 'WEST', 'e' to go EAST, 's' to search within the room, and 'q' to QUIT \n")
-
-
+print("\n Chose what you want to do with: \n 'n' to go NORTH, 's' to go SOUTH, 'w' to go WEST, 'e' to go EAST, \n 'l' to look within the room, and 'q' to QUIT \n")
 
 while playerOne.move != "q":
     print(playerOne.currentRoom.attributes)
     playerOne.move = input(" ").strip().lower()
-    attribute = playerOne.move + "_to"
 
-#GOING NORTH
-    if playerOne.move == "n":
-        if hasattr(playerOne.currentRoom, attribute):
-            print("You went NORTH")
-            playerOne.currentRoom = playerOne.currentRoom.n_to
-        else:
-            print(f"\n There are no rooms North of {playerOne.currentRoom} \n")
-
-#GOING EAST
-    elif playerOne.move == "e":
-        if hasattr(playerOne.currentRoom, attribute):
-            print("You went EAST")
-            playerOne.currentRoom = playerOne.currentRoom.e_to
-        else:
-            print(f"\n There are no rooms East of {playerOne.currentRoom} \n")
-
-#GOING SOUTH
-    elif playerOne.move == "s":
-        if hasattr(playerOne.currentRoom, attribute):
-            print("You went SOUTH")
-            playerOne.currentRoom = playerOne.currentRoom.s_to
-        else:
-            print(f"\n There are no rooms South of {playerOne.currentRoom} \n")
-
-#GOING WEST 
-    elif playerOne.move == "w":
-        if hasattr(playerOne.currentRoom, attribute):
-            print("You went WEST")
-            playerOne.currentRoom = playerOne.currentRoom.w_to
-        else:
-            print(f"\n There are no rooms West of {playerOne.currentRoom} \n")
+#Check for directional input first
+    playerOne.direction()
+#Search Room
+    if playerOne.move == "l":
+        print(f"{playerOne.currentRoom.name} currently has {playerOne.currentRoom.items}")
 
 #QUITING
     elif playerOne.move == "q":
