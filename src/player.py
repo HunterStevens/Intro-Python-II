@@ -23,8 +23,8 @@ class Player:
                 pass
     
     def direction(self):
-        if self.move == "n" or self.move == "e" or self.move == "s" or self.move == "w":
-            attribute = self.move + "_to"
+        if "north" in self.move or "east" in self.move or "south" in self.move or "west" in self.move:
+            attribute = self.move[0] + "_to"
             if hasattr(self.currentRoom, attribute):
                 self.currentRoom = getattr(self.currentRoom, attribute)
                 print(f"You moved to {self.currentRoom}")

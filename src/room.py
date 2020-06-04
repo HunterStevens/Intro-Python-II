@@ -10,6 +10,12 @@ class Room:
     def __str__(self):
         return f"{self.name}"
 
+    def get_items(self):
+        list = []
+        for i in self.items:
+            list.append(i.name)
+        return list
+
     def add_item(self, newItem):
         self.items.append(newItem)
         return f"{newItem} was added to {self.name}"
