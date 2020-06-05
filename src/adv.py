@@ -8,14 +8,14 @@ room = {
                      "North of you, the cave mount beckons", [Item("little_feather", "it's your lucky charm from your childhood. Why couldn't you remember that?")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", []),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm.""", [Item("telescope", "a device probably used for skywatching")]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
@@ -39,11 +39,21 @@ def player_take(Taking_item):
     for i in playerOne.currentRoom.items:
         if i.name == Taking_item:
             found_item = i
-        playerOne.add_item(found_item)
-        playerOne.currentRoom.drop_item(found_item)
-    else:
-        print(f"{Taking_item} does not exist in this room")
+            playerOne.add_item(found_item)
+            playerOne.currentRoom.drop_item(found_item)
+            print(f"You take the {found_item}")
+        else:
+            print(f"{Taking_item} does not exist in this room")
 
+def player_drop(droping):
+    for i in playerOne.items:
+        if i.name == droping:
+            found_item = i
+            playerOne.currentRoom.add_item(found_item)
+            playerOne.drop_item(found_item)
+            print(f"{found_item} is now in the {playerOne.currentRoom}")
+        else:
+            print(f"you do not have {found_item} in your inventory.")
 # Make a new player object that is currently in the 'outside' room.
 playerOne = Player("player", "nowhere", room['outside'], [])
 # Write a loop that:
@@ -74,13 +84,20 @@ while not quit_game:
 
 #Take an item in the room
     elif "take" in playerOne.move:
-        print(playerOne.move)
         choice = playerOne.move[1]
         player_take(choice)
 
 #Checking inventory
     elif "inventory" in playerOne.move:
-        print
+        print (f"Currently you, {playerOne.name} have: {playerOne.get_items()}")
+        see = input("Which item do you want to look at? ")
+        print(f"{playerOne.get_specific_item(see)}")
+
+#drop an item
+    elif "drop" in playerOne.move:
+        choice = playerOne.move[1]
+        player_drop(choice)
+
 
 #QUITING
     elif "q" in playerOne.move:

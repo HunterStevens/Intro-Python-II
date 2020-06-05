@@ -17,8 +17,8 @@ class Room:
         return list
 
     def add_item(self, newItem):
-        self.items.append(newItem)
-        return f"{newItem} was added to {self.name}"
+       self.items.append(newItem)
+       return f"{self.name}, you just dropped {newItem}"
     
     def drop_item(self, pick):
         print(f"pick: {pick}")
