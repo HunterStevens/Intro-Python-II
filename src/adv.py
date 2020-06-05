@@ -8,14 +8,14 @@ room = {
                      "North of you, the cave mount beckons", [Item("little_feather", "it's your lucky charm from your childhood. Why couldn't you remember that?")]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", []),
+passages run north and east.""", [Item("wrench", "rusty tool. It has seen better days"), Item("Crackers","salty goodness. then again, maybe its run stale."), Item("photo 1","This photo is a family portrait but the faces are scratched off")]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", [Item("telescope", "a device probably used for skywatching")]),
+the distance, but there is no way across the chasm.""", [Item("telescope", "a device probably used for skywatching"), Item("Coins","very old coins - if only there was a shopkeeper around")]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", []),
+to north. The smell of gold permeates the air.""", [Item("long sword", "heavy sword is equivelant to heavy weight"), Item("knife", "good use for sneaking around. Just don't bring it to a gun fight.")]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
